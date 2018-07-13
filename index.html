@@ -16,6 +16,7 @@
             $.get(CORS_PROXY+'https://www.ithome.com/rss',(data,status)=>{
                 //console.log(data);
                 var dataHash = hex_md5(data);
+                console.log(dataHash);
                 if(dataFlag != dataHash){
                     let parser = new RSSParser();
                     parser.parseURL(CORS_PROXY + 'https://www.ithome.com/rss/', function(err, feed) {
@@ -41,6 +42,6 @@
                     console.log(1);
                 }
             })
-        },2000)
+        },5000)
     </script>
 </html>
