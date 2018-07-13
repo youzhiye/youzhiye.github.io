@@ -12,27 +12,22 @@
         var dataFlag = 'of';
         const CORS_PROXY = "https://cors-anywhere.herokuapp.com/"
         setInterval(()=>{
-            $.get(CORS_PROXY+'https://www.ithome.com/rss',(data,status)=>{
-                var dataHash = (data.querySelectorAll('item title')[0]);;
-                console.log(dataHash);
+            $.get(CORS_PROXY+'https://www.ithome.com/',(data,status)=>{
+                var dataHash = data.querySelectorAll('.new-list-1 ul li')[0].textContent;
+                var dataHashHref = data.querySelectorAll('.new-list-1 ul li')[0].lastChild.firstChild.href;
                 if(dataFlag != dataHash){
-                    let parser = new RSSParser();
-                    parser.parseURL(CORS_PROXY + 'https://www.ithome.com/rss/', function(err, feed) {
-                        Notification.requestPermission();                        
-                        console.log(feed.items[0].title);
-                        var notification = new Notification('ithome',{
-                            dir: 'auto',
-                            icon: 'https://www.ithome.com/favicon.ico',
-                            data: {
-                                url: feed.items[0].link
-                            },
-                            body: feed.items[0].title
-                        })
-                        notification.onclick = function(){
-                            window.open(notification.data.url);
-                            notification.close();
-                        }
+                    var notification = new Notification('ithome',{
+                        dir: 'auto',
+                        icon: 'https://www.ithome.com/favicon.ico',
+                        data: {
+                            url: dataHashHref
+                        },
+                        body: dataHash
                     })
+                    notification.onclick = function(){
+                        window.open(notification.data.url);
+                        notification.close();
+                    }
                     dataFlag = dataHash;
                 }
                 else{
