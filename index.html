@@ -19,6 +19,7 @@ parser.parseURL(CORS_PROXY + 'https://www.ithome.com/rss/', function(err, feed) 
               console.log('1');
           }
           else{
+            lastNews = hex_md5(news.title);
             Notification.requestPermission();
             var notification = new Notification('ithome',{
                 dir: 'auto',
