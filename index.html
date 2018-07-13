@@ -29,6 +29,7 @@
                     })
                     notification.onclick = function(){
                         window.open(notification.data.url);
+                        console.log(dataHash);
                         notification.close();
                     }
                     dataFlag = dataHash;
