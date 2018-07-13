@@ -19,7 +19,8 @@
                 if(dataFlag != dataHash){
                     let parser = new RSSParser();
                     parser.parseURL(CORS_PROXY + 'https://www.ithome.com/rss/', function(err, feed) {
-                        Notification.requestPermission();
+                        Notification.requestPermission();                        
+                        console.log(feed.items[0].title);
                         var notification = new Notification('ithome',{
                             dir: 'auto',
                             icon: 'https://www.ithome.com/favicon.ico',
@@ -30,7 +31,6 @@
                         })
                         notification.onclick = function(){
                             window.open(notification.data.url);
-                            console.log(feed.items[0].title);
                             notification.close();
                         }
                     })
