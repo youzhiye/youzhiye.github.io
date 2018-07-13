@@ -23,13 +23,15 @@ parser.parseURL(CORS_PROXY + 'https://www.ithome.com/rss/', function(err, feed) 
             var notification = new Notification('ithome',{
                 dir: 'auto',
                 data:{
-                    url:`${news.link}`
+                    url:`${news.link}`,
+                    title: `${news.title}`
                 },
                 tag:i,
                 icon: 'https://www.ithome.com/favicon.ico',
                 body: `${news.title}`
             })
             notification.onclick = function(){
+                console.log('title:',notification.data.title);
                 window.open(notification.data.url);
                 notification.close();
             }
@@ -41,13 +43,15 @@ parser.parseURL(CORS_PROXY + 'https://www.ithome.com/rss/', function(err, feed) 
           var notification = new Notification('ithome',{
           dir: 'auto',
           data:{
-              url: `${news.link}`
+              url: `${news.link}`,
+              title: `${news.title}`
           },
           tag: i,
           icon: 'https://www.ithome.com/favicon.ico',
           body: `${news.title}`
           })
           notification.onclick = function(){
+              console.log('title:',notification.data.title)
                 window.open(notification.data.url);
                 notification.close();
             }
