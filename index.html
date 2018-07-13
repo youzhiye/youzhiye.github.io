@@ -4,5 +4,56 @@
     </head>
     <body>
         this is a page with nothing content
+        <script src="rss-parser.min.js"></script>
+        <script src="md5.js"></script>
+<script>
+
+const CORS_PROXY = "https://cors-anywhere.herokuapp.com/"
+var lastNews = '0f';
+setInterval(() =>{ 
+let parser = new RSSParser();
+parser.parseURL(CORS_PROXY + 'https://www.ithome.com/rss/', function(err, feed) {
+  for(let i = 0; i < 3; i++){
+      var news = feed.items[i];
+      if(lastNews != '0f'){
+          if(lastNews == hex_md5(news.title)){
+              break;
+          }
+          else{
+            Notification.requestPermission();
+            var notification = new Notification('ithome',{
+                dir: 'auto',
+                lang: 'html',
+                tag:i,
+                icon: 'https://www.ithome.com/favicon.ico',
+                body: `${news.title}`
+            })
+            notification.onclick = function(){
+                window.open(news.link);
+                notification.close();
+            }
+          }
+      }
+      else{
+          lastNews = hex_md5(news.title);
+          Notification.requestPermission();
+          var notification = new Notification('ithome',{
+          dir: 'auto',
+          lang: 'html',
+          tag: i,
+          icon: 'https://www.ithome.com/favicon.ico',
+          body: `${news.title}`
+          })
+          notification.onclick = function(){
+                window.open(news.link);
+                notification.close();
+            }
+        }
+  }
+})
+},1000);
+
+ 
+</script> 
     </body>
 </html>
