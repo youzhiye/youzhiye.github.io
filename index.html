@@ -10,12 +10,10 @@
 
 const CORS_PROXY = "https://cors-anywhere.herokuapp.com/"
 var lastNews = '0f';
-var newsMap = {'legth':0};
 let parser = new RSSParser();
 parser.parseURL(CORS_PROXY + 'https://www.ithome.com/rss/', function(err, feed) {
   for(let i = 0; i < 3; i++){
       var news = feed.items[i];
-      newsMap[news.title] = news.link;
       if(lastNews != '0f'){
           if(lastNews == hex_md5(news.title)){
               break;
@@ -24,13 +22,15 @@ parser.parseURL(CORS_PROXY + 'https://www.ithome.com/rss/', function(err, feed) 
             Notification.requestPermission();
             var notification = new Notification('ithome',{
                 dir: 'auto',
-                lang: 'html',
+                data:{
+                    url:`${news.link}`
+                },
                 tag:i,
                 icon: 'https://www.ithome.com/favicon.ico',
                 body: `${news.title}`
             })
             notification.onclick = function(){
-                window.open(newsMap[news.title]);
+                window.open(notification.data.url);
                 notification.close();
             }
           }
@@ -40,13 +40,15 @@ parser.parseURL(CORS_PROXY + 'https://www.ithome.com/rss/', function(err, feed) 
           Notification.requestPermission();
           var notification = new Notification('ithome',{
           dir: 'auto',
-          lang: 'html',
+          data:{
+              url: `${news.link}`
+          },
           tag: i,
           icon: 'https://www.ithome.com/favicon.ico',
           body: `${news.title}`
           })
           notification.onclick = function(){
-                window.open(newsMap[news.title]);
+                window.open(notification.data.url);
                 notification.close();
             }
         }
