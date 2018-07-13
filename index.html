@@ -6,12 +6,10 @@
     <body>
         this is a page with nothing content
         <script src="rss-parser.min.js"></script>
-        <script src="md5.js"></script>
         <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
     </body>
     <script>
         var dataFlag = 'of';
-        var bbbb;
         const CORS_PROXY = "https://cors-anywhere.herokuapp.com/"
         setInterval(()=>{
             $.get(CORS_PROXY+'https://www.ithome.com/rss',(data,status)=>{
@@ -36,7 +34,6 @@
                         }
                     })
                     dataFlag = dataHash;
-                    console.log(dataFlag);
                 }
                 else{
                     console.log(1);
