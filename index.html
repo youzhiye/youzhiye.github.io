@@ -15,8 +15,8 @@
         const CORS_PROXY = "https://cors-anywhere.herokuapp.com/"
         setInterval(()=>{
             $.get(CORS_PROXY+'https://www.ithome.com/rss',(data,status)=>{
-                console.log(data.querySelectorAll('item title')[0]);
-                var dataHash = hex_md5(data.querySelectorAll('item title')[0]);
+                var a = (data.querySelectorAll('item title')[0]);
+                var dataHash = hex_md5(a);
                 console.log(dataHash);
                 if(dataFlag != dataHash){
                     let parser = new RSSParser();
