@@ -13,7 +13,7 @@
         var dataFlag = 'of';
         const CORS_PROXY = "https://cors-anywhere.herokuapp.com/"
         setInterval(()=>{
-            $.get('https://www.ithome.com/rss',(data,status)=>{
+            $.get(CORS_PROXY+'https://www.ithome.com/rss',(data,status)=>{
                 var dataHash = hex_md5(data);
                 if(dataFlag != dataHash){
                     let parser = new RSSParser();
