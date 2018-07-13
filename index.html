@@ -16,7 +16,7 @@ parser.parseURL(CORS_PROXY + 'https://www.ithome.com/rss/', function(err, feed) 
       var news = feed.items[0];
       if(lastNews != '0f'){
           if(lastNews == hex_md5(news.title)){
-              break;
+              console.log('1');
           }
           else{
             Notification.requestPermission();
@@ -58,7 +58,6 @@ parser.parseURL(CORS_PROXY + 'https://www.ithome.com/rss/', function(err, feed) 
         }
 })
 },60000);
- 
 </script> 
     </body>
 </html>
