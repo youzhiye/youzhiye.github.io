@@ -10,10 +10,10 @@
 
 const CORS_PROXY = "https://cors-anywhere.herokuapp.com/"
 var lastNews = '0f';
+setInterval(()=>{
 let parser = new RSSParser();
 parser.parseURL(CORS_PROXY + 'https://www.ithome.com/rss/', function(err, feed) {
-  for(let i = 0; i < 3; i++){
-      var news = feed.items[i];
+      var news = feed.items[0];
       if(lastNews != '0f'){
           if(lastNews == hex_md5(news.title)){
               break;
@@ -26,7 +26,7 @@ parser.parseURL(CORS_PROXY + 'https://www.ithome.com/rss/', function(err, feed) 
                     url:`${news.link}`,
                     title: `${news.title}`
                 },
-                tag:i,
+                tag:0,
                 icon: 'https://www.ithome.com/favicon.ico',
                 body: `${news.title}`
             })
@@ -46,7 +46,7 @@ parser.parseURL(CORS_PROXY + 'https://www.ithome.com/rss/', function(err, feed) 
               url: `${news.link}`,
               title: `${news.title}`
           },
-          tag: i,
+          tag: 0,
           icon: 'https://www.ithome.com/favicon.ico',
           body: `${news.title}`
           })
@@ -56,8 +56,8 @@ parser.parseURL(CORS_PROXY + 'https://www.ithome.com/rss/', function(err, feed) 
                 notification.close();
             }
         }
-  }
 })
+},60000);
  
 </script> 
     </body>
