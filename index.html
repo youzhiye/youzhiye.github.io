@@ -46,7 +46,7 @@ parser.parseURL(CORS_PROXY + 'https://www.ithome.com/rss/', function(err, feed) 
           body: `${news.title}`
           })
           notification.onclick = function(){
-                window.open(newsMap[news.link]);
+                window.open(newsMap[news.title]);
                 notification.close();
             }
         }
