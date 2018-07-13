@@ -10,7 +10,6 @@
 
 const CORS_PROXY = "https://cors-anywhere.herokuapp.com/"
 var lastNews = '0f';
-setInterval(() =>{ 
 let parser = new RSSParser();
 parser.parseURL(CORS_PROXY + 'https://www.ithome.com/rss/', function(err, feed) {
   for(let i = 0; i < 3; i++){
@@ -51,8 +50,6 @@ parser.parseURL(CORS_PROXY + 'https://www.ithome.com/rss/', function(err, feed) 
         }
   }
 })
-},1000);
-
  
 </script> 
     </body>
