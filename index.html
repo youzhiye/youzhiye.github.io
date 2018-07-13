@@ -13,7 +13,7 @@
         const CORS_PROXY = "https://cors-anywhere.herokuapp.com/"
         setInterval(()=>{
             $.get(CORS_PROXY+'https://www.ithome.com/',(data,status)=>{
-                console.log(data);
+                var bbbb = data;
                 var dataHash = data.querySelectorAll('.new-list-1 ul li')[0].textContent;
                 var dataHashHref = data.querySelectorAll('.new-list-1 ul li')[0].lastChild.firstChild.href;
                 if(dataFlag != dataHash){
