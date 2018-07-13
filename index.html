@@ -18,7 +18,8 @@
                 var data=parser.parseFromString(data, "text/html");
                 var dataHash = data.querySelectorAll('.new-list-1 ul li')[0].textContent;
                 var dataHashHref = data.querySelectorAll('.new-list-1 ul li')[0].lastChild.firstChild.href;
-                if(dataFlag != dataHash){
+                if(dataFlag != dataHash){                    
+                    console.log(dataHash);
                     var notification = new Notification('ithome',{
                         dir: 'auto',
                         icon: 'https://www.ithome.com/favicon.ico',
@@ -29,7 +30,6 @@
                     })
                     notification.onclick = function(){
                         window.open(notification.data.url);
-                        console.log(dataHash);
                         notification.close();
                     }
                     dataFlag = dataHash;
