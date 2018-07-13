@@ -14,7 +14,7 @@
         const CORS_PROXY = "https://cors-anywhere.herokuapp.com/"
         setInterval(()=>{
             $.get(CORS_PROXY+'https://www.ithome.com/rss',(data,status)=>{
-                console.log(data);
+                //console.log(data);
                 var dataHash = hex_md5(data);
                 if(dataFlag != dataHash){
                     let parser = new RSSParser();
@@ -30,10 +30,12 @@
                         })
                         notification.onclick = function(){
                             window.open(notification.data.url);
+                            console.log(feed.items[0].title);
                             notification.close();
                         }
                     })
                     dataFlag = dataHash;
+                    console.log(dataFlag);
                 }
                 else{
                     console.log(1);
