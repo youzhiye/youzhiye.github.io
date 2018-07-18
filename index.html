@@ -5,9 +5,7 @@
     </head>
     <body>
         this is a page with nothing content
-        <script src="rss-parser.min.js"></script>
         <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
-    </body>
     <script>
         var dataFlag = 'of';
         var bbb;
@@ -16,8 +14,8 @@
             $.get(CORS_PROXY+'https://www.ithome.com/',(data,status)=>{
                 var parser = new DOMParser();
                 var data=parser.parseFromString(data, "text/html");
-                var dataHash = data.querySelectorAll('.new-list-1 ul li')[0].textContent;
-                var dataHashHref = data.querySelectorAll('.new-list-1 ul li')[0].lastChild.firstChild.href;
+                var dataHash = data.querySelectorAll('.new-list-1 ul .new')[0].textContent;
+                var dataHashHref = data.querySelectorAll('.new-list-1 ul .new')[0].lastChild.firstChild.href;
                 if(dataFlag != dataHash){                    
                     console.log(dataHash);
                     var notification = new Notification('ithome',{
@@ -40,4 +38,5 @@
             },"html");
         },5000)
     </script>
+    </body>
 </html>
