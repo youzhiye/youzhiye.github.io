@@ -63,7 +63,8 @@
 			var textValue = document.getElementById('content-text').value;
 			var b = textValue.split('\n');
 			for(let i of b){
-				var compareValue = i.split('\t');
+				var ccc = i.replace('\t',' ');
+				var compareValue = ccc.split(' ');
 				if(compareValue[1]>numberid){
 					console.log(i);
 					var aa = document.getElementById('finalValue');
