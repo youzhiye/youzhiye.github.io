@@ -98,7 +98,10 @@
 					else aa.innerHTML = aa.innerHTML + ',' + i.replace(' ','');
 				}
 			}
-			aa.innerHTML = aa.innerHTML + '。' + '目前降水量最大的区域站点是：' + maxarr.replace(' ','');
+			if(flag == 0){
+				aa.innerHTML = aa.innerHTML + maxarr.replace(' ','');
+			}
+			else aa.innerHTML = aa.innerHTML + '。' + '目前降水量最大的区域站点是：' + maxarr.replace(' ','');
 		}
 	</script>	
 </body>
