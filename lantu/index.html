@@ -57,18 +57,13 @@
 	<script type="text/javascript" src="js/three.js"></script>
 	<script type="text/javascript" src="js/snow.js"></script>
     <script>
-		var compare = function (x, y) {//比较函数
-    		if (x < y) {
-        		return 1;
-    		} else if (x > y) {
-        		return -1;
-    		} else {
-        	return 0;
-    		}
+		var compare = function (x,y) {//比较函数
+			return y - x;
 		}
 		function test(){
 			var value = [];
 			var maxNum = 0;
+			var maxarr;
 			var flag = 0;
 			var valueArrary = ['永隆','石龙','雁门口','钱场','新市','孙桥','永兴','曹武','杨集','绿林','坪坝','三阳','宋河','罗店','马岭'];
 			var numberid = document.getElementById('numberId').value;
@@ -88,9 +83,9 @@
 				i = i.replace('\t',' ');
 				let compareValue = i.split(' ');
 				if(compareValue[1] == maxNum){
-					var maxarr = i;
+					maxarr = compareValue;
 				}
-				if(compareValue[1]>numberid && valueArrary.includes(compareValue[0]) && compareValue[1] != maxNum){ 
+				if(compareValue[1]>=Number(numberid) && valueArrary.includes(compareValue[0]) && compareValue[1] != maxNum){ 
 					if(flag==0){
 						aa.innerHTML = aa.innerHTML + i.replace(' ','');
 						flag=1;
@@ -99,9 +94,9 @@
 				}
 			}
 			if(flag == 0){
-				aa.innerHTML = aa.innerHTML + maxarr.replace(' ','');
+				aa.innerHTML = aa.innerHTML + maxarr[0] + maxarr[1];
 			}
-			else aa.innerHTML = aa.innerHTML + '。' + '目前降水量最大的区域站点是：' + maxarr.replace(' ','');
+			else aa.innerHTML = aa.innerHTML + '。' + '目前降水量最大的区域站点是：' + maxarr[0] + maxarr[1];
 		}
 	</script>	
 </body>
