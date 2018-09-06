@@ -49,7 +49,7 @@
 		<h3>NO title</h3>
 		<textarea name="html-text" id="content-text" cols="60" rows="10" placeholder="在此处粘贴文本..." style="border-radius: 5px"></textarea></br>
 		<em>输入数字</em><br>
-		<input type="number" name="numName" id="numberId" value="0" style="width: 60px; border-radius: 4px"><br><br>  
+		<input type="number" name="numName" id="numberId" value="0.001" style="width: 60px; border-radius: 4px"><br><br>  
 		<button onclick="test()">提交</button><br>
 		<div id='finalValue'></div>
 	</div>	
@@ -65,14 +65,15 @@
 			var maxNum = 0;
 			var maxarr;
 			var flag = 0;
-			var valueArrary = ['永隆','石龙','雁门口','钱场','新市','孙桥','永兴','曹武','杨集','绿林','坪坝','三阳','宋河','罗店','马岭'];
+			var valueArrary = ['永隆','石龙','雁门口','钱场','新市','孙桥','永兴','曹武','杨集','绿林','坪坝','三阳','宋河','罗店'];
+			var notValue = ['武荆高速K976','随岳高速k173+700','随岳高速k141+100','武荆高速K942+30','武荆高速K953+520','黄台','空山洞','洞冲','将军岭'];
 			var numberid = document.getElementById('numberId').value;
 			var textValue = document.getElementById('content-text').value;
 			var b = textValue.split('\n');
 			for(let j of b){
 				j = j.replace('\t',' ');
 				let compareValue = j.split(' ');
-				if(valueArrary.includes(compareValue[0])){
+				if(!notValue.includes(compareValue[0])){
 					value.push(compareValue[1]); 
 				} 
 			}
