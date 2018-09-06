@@ -1,0 +1,73 @@
+<html>
+    <head>
+        <title>index</title>
+    </head>
+    <body>
+        this is a page with nothing content
+        <script src="rss-parser.min.js"></script>
+        <script src="md5.js"></script>
+        <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
+<script>
+
+const CORS_PROXY = "https://cors-anywhere.herokuapp.com/"
+var lastNews = '0f';
+var OldDataHash = 'of';
+$.get('https://www.ithome.com/rss/',function(data,status){
+    var NewDataHash = hex_md5(data);
+    if(NewDataHash != OldDataHash){
+let parser = new RSSParser();
+parser.parseURL(CORS_PROXY + 'https://www.ithome.com/rss/', function(err, feed) {
+      var news = feed.items[0];
+      if(lastNews != '0f'){
+          if(lastNews == hex_md5(news.title)){
+              console.log('1');
+          }
+          else{
+            lastNews = hex_md5(news.title);
+            Notification.requestPermission();
+            var notification = new Notification('ithome',{
+                dir: 'auto',
+                data:{
+                    url:`${news.link}`,
+                    title: `${news.title}`
+                },
+                tag:0,
+                icon: 'https://www.ithome.com/favicon.ico',
+                body: `${news.title}`
+            })
+            notification.onclick = function(){
+                console.log('title:',notification.data.title);
+                window.open(notification.data.url);
+                notification.close();
+            }
+          }
+      }
+      else{
+          lastNews = hex_md5(news.title);
+          Notification.requestPermission();
+          var notification = new Notification('ithome',{
+          dir: 'auto',
+          data:{
+              url: `${news.link}`,
+              title: `${news.title}`
+          },
+          tag: 0,
+          icon: 'https://www.ithome.com/favicon.ico',
+          body: `${news.title}`
+          })
+          notification.onclick = function(){
+              console.log('title:',notification.data.title)
+                window.open(notification.data.url);
+                notification.close();
+            }
+        }
+})
+}
+else{
+    console(1);
+}
+})
+
+</script> 
+    </body>
+</html>
