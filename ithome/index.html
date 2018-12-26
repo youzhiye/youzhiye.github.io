@@ -1,0 +1,38 @@
+<html>
+    <head>
+        <title>index</title>
+    </head>
+    <body>
+        this is a page with nothing content
+        <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
+    <script>
+        var dataFlag = 'of';
+        var bbb;
+        const CORS_PROXY = "https://cors-anywhere.herokuapp.com/"
+        setInterval(()=>{
+            $.get(CORS_PROXY+'https://www.ithome.com/',(data,status)=>{
+                var parser = new DOMParser();
+                var data=parser.parseFromString(data, "text/html");
+                var dataHash = data.querySelectorAll('.new-list-1 ul .new')[0].lastChild.textContent;
+                var dataHashHref = data.querySelectorAll('.new-list-1 ul .new')[0].lastChild.firstChild.href;
+                if(dataFlag != dataHash){                    
+                    console.log(dataHash);
+                    var notification = new Notification('ithome',{
+                        dir: 'auto',
+                        icon: 'https://www.ithome.com/favicon.ico',
+                        data: {
+                            url: dataHashHref
+                        },
+                        body: dataHash
+                    })
+                    notification.onclick = function(){
+                        window.open(notification.data.url);
+                        notification.close();
+                    }
+                    dataFlag = dataHash;
+                }
+            },"html");
+        },20000)
+    </script>
+    </body>
+</html>
