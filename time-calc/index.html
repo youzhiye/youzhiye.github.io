@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <script src="../js/jquery.min.js"></script>
+    <script src="./jquery.min.js"></script>
     <title>time-calc</title>
 </head>
 
@@ -14,7 +14,8 @@
         <label>请输入要做的事情</label>
         <input type="text" id="sth" name=sth>
         <label>请输入事情开始时间</label>
-        <input type="datetime-local" id="startTime" name='null'>
+        <input type="date" id="startDate" name='null'>
+        <input type="time" id="startTime" name="null">
     </div>
     <div class="add"></div>
     <button type="submit" id="addbtn">添加事件</button><br>
@@ -29,7 +30,8 @@
         if (idNum == 0) {
             let sth = $('#sth').val();
             let startTime = $('#startTime').val();
-            $('.mainthing').html('<h3>您要在 <em class="startTime">' + startTime + ' </em>去 <em class="sth">' + sth + ' </em></h3>')
+            let startDate = $('#startDate').val();
+            $('.mainthing').html('<h3>您要在 <em class="startTime">' + startDate+'T'+startTime + ' </em>去 <em class="sth">' + sth + ' </em></h3>')
         }
     })
     function getData(num, startTime) {
