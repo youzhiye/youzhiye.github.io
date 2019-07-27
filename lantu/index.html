@@ -60,11 +60,20 @@
 		var compare = function (x,y) {//比较函数
 			return y - x;
 		}
+		var compare1 = function (arr){
+			return function(a,b){
+				var v1 = a[1];
+				var v2 = b[1];
+				return v1-v2;
+			}
+		}
 		function test(){
 			var value = [];
+			var value1 = [];
 			var maxNum = 0;
-			var maxarr;
-			var flag = 0;
+			var maxarr=[];
+			var flag = 0;   //是否加逗号
+			var fouth = {};
 			var valueArrary = ['永隆','石龙','雁门口','钱场','新市','孙桥','永兴','曹武','杨集','绿林','坪坝','三阳','宋河','罗店'];
 			var notValue = ['武荆高速K976','随岳高速k173+700','随岳高速k141+100','武荆高速K942+30','武荆高速K953+520','黄台','空山洞','洞冲','将军岭'];
 			var numberid = document.getElementById('numberId').value;
@@ -76,28 +85,33 @@
 				if(!notValue.includes(compareValue[0])){
 					value.push(compareValue[1]); 
 				} 
+				if(valueArrary.includes(compareValue[0])){
+					fouth[compareValue[0]]=compareValue[1];
+				}
 			}
 			maxNum = value.sort(compare)[0];
 			var aa = document.getElementById('finalValue');
+			var sorted_keys_array = Object.keys(fouth).sort((a,b)=>{
+       			return fouth[b]-fouth[a];
+			});
 			aa.innerHTML = '雨情通报：昨天07时到今天07时雨量（毫米）：';
+			for(let i of sorted_keys_array){
+				if(flag == 0){
+				aa.innerHTML = aa.innerHTML + i + fouth[i];
+				flag =1
+				}
+				else{
+					aa.innerHTML = aa.innerHTML + ',' + i + fouth[i];
+				}
+			}
 			for(let i of b){
 				i = i.replace('\t',' ');
 				let compareValue = i.split(' ');
-				if(compareValue[1] == maxNum){
-					maxarr = compareValue;
-				}
-				if(compareValue[1]>=Number(numberid) && valueArrary.includes(compareValue[0]) && compareValue[1] != maxNum){ 
-					if(flag==0){
-						aa.innerHTML = aa.innerHTML + i.replace(' ','');
-						flag=1;
-					}
-					else aa.innerHTML = aa.innerHTML + ',' + i.replace(' ','');
+				if(compareValue[1] == maxNum && !notValue.includes(compareValue[0])){
+					maxarr.push(compareValue);
 				}
 			}
-			if(flag == 0){
-				aa.innerHTML = aa.innerHTML + maxarr[0] + maxarr[1];
-			}
-			else aa.innerHTML = aa.innerHTML + '。' + '目前降水量最大的区域站点是：' + maxarr[0] + maxarr[1];
+			aa.innerHTML = aa.innerHTML + '。' + '目前降水量最大的区域站点是：' + maxarr;
 		}
 	</script>	
 </body>
