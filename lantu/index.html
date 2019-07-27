@@ -108,7 +108,8 @@
 				i = i.replace('\t',' ');
 				let compareValue = i.split(' ');
 				if(compareValue[1] == maxNum && !notValue.includes(compareValue[0])){
-					maxarr.push(compareValue);
+					let new_string = compareValue[0]+compareValue[1]
+					maxarr.push(new_string);
 				}
 			}
 			aa.innerHTML = aa.innerHTML + '。' + '目前降水量最大的区域站点是：' + maxarr;
